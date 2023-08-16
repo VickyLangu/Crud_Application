@@ -1,0 +1,39 @@
+{
+  "members": [
+    {
+      "name": "Langutani",
+      "text": "Front End Developer",
+      "reminder": false,
+      "image": "blob:http://localhost:3000/aae51375-7cda-4931-b009-062395c49bd1",
+      "id": 1
+    },
+    {
+      "name": "Langutani",
+      "text": "Front End Developer",
+      "reminder": false,
+      "image": "blob:http://localhost:3000/a50a4dbb-9ee0-4ef7-9b25-42460145ecef",
+      "id": 6
+    },
+    {
+      "name": "Jone Doe",
+      "text": "UI/UX DESIGNER",
+      "reminder": false,
+      "image": null,
+      "id": 7
+    },
+    {
+      "name": "Jane Doe",
+      "text": "UI/UX DESIGNER",
+      "reminder": false,
+      "image": "blob:http://localhost:3000/4c4814ce-28c8-404a-8c1d-0f1a98330f50",
+      "id": 8
+    },
+    {
+      "name": "Jane Doe",
+      "text": "Front end developer",
+      "reminder": false,
+      "image": null,
+      "id": 9
+    }
+  ]
+}
