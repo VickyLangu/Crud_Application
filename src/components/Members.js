@@ -1,7 +1,7 @@
 import Member from "./Member";
 import { useNavigate } from "react-router-dom";
 
-const Members = ({ members, onDelete, onToggle, onEdit }) => {
+const Members = ({ members, onDelete, handleToggle, handleEdit, onEdit }) => {
   const navigate = useNavigate();
   const handleEditClick = (id) => {
     const selectedMember = members.find((member) => member.id === id);
@@ -17,8 +17,8 @@ const Members = ({ members, onDelete, onToggle, onEdit }) => {
           key={member.id}
           member={member}
           onDelete={onDelete}
-          onToggle={onToggle}
-          onEdit={onEdit}
+          onToggle={handleToggle}
+          onEdit={handleEditClick} // Change 'onEdit' to 'handleEditClick'
         />
       ))}
     </>

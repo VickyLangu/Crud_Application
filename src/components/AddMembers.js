@@ -1,5 +1,7 @@
 // import { useState } from "react";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const AddMembers = ({ onAdd }) => {
   const [name, setText] = useState("");
@@ -37,12 +39,30 @@ const AddMembers = ({ onAdd }) => {
 
   return (
     <form className="add-form" onSubmit={onSubmit}>
+      <div className="arrow-link" style={{ width: "40px" }}>
+        <Link to="/">
+          <FaArrowLeft
+            style={{
+              fontSize: "10px",
+              width: "100%",
+              height: "100%",
+              color: "#164b60",
+            }}
+          />
+        </Link>
+      </div>
       <div className="profile-picture-container">
-        {image && (
+        {image ? (
           <img
             src={URL.createObjectURL(image)}
             alt="Profile"
             className="profile-picture"
+          />
+        ) : (
+          <img
+            src={require("../image/background.png")} // Replace with the actual path to your placeholder image
+            alt=""
+            className="placeholder-image"
           />
         )}
         <label htmlFor="profile-picture" className="profile-picture-label">

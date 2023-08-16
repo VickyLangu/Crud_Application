@@ -6,15 +6,22 @@ import { Link } from "react-router-dom";
 
 const Member = ({ member, onDelete, onToggle, onEdit }) => {
   const [editing, setEditing] = useState(false);
-  const editTask = (updatedMember) => {
-    // Call the onEdit function and pass the updatedMember object
-    onEdit(member.id, updatedMember);
+  const toggleEditing = () => {
+    setEditing(!editing);
   };
+  const editTask = (updatedMember) => {
+    onEdit(member.id, updatedMember);
+    toggleEditing();
+  };
+
+  // const Delete = (member) => {
+  //   onDelete(member);
+  // };
 
   return (
     <div
       className={`member ${member.reminder ? "reminder" : ""}`}
-      onDoubleClick={() => onToggle(member.name)}
+      // onDoubleClick={() => onToggle(member.name)}
     >
       <div className="member-content">
         {member.image && (
@@ -30,7 +37,7 @@ const Member = ({ member, onDelete, onToggle, onEdit }) => {
             <Link to={`/edit/${member.id}`}>
               <FaPencilAlt
                 style={{ color: "gray", cursor: "pointer" }}
-                onClick={() => onEdit(member.id)} // Use onEdit instead of onEditClick
+                onClick={toggleEditing} // Use onEdit instead of onEditClick
               />
             </Link>
             <FaTrashAlt
@@ -39,11 +46,13 @@ const Member = ({ member, onDelete, onToggle, onEdit }) => {
             />
           </div>
           {editing ? (
-            <EditMember onSubmit={editTask} />
+            <EditMember
+              member={member} // Pass the existing member data to EditMember
+              onSubmit={onEdit} // Pass the onEdit function directly
+            />
           ) : (
             <h3>{member.text}</h3>
           )}
-          {/* <h3>{member.text}</h3> */}
         </div>
       </div>
     </div>
