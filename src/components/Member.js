@@ -48,7 +48,7 @@ const Member = ({ member, onDelete, onToggle, onEdit }) => {
           {editing ? (
             <EditMember
               member={member} // Pass the existing member data to EditMember
-              onSubmit={onEdit} // Pass the onEdit function directly
+              onEdit={editTask} // Pass the onEdit function directly
             />
           ) : (
             <h3>{member.text}</h3>

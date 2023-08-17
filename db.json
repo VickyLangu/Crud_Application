@@ -1,13 +1,6 @@
 {
   "members": [
     {
-      "name": "Langutani",
-      "text": "Front End Developer",
-      "reminder": false,
-      "image": "blob:http://localhost:3000/aae51375-7cda-4931-b009-062395c49bd1",
-      "id": 1
-    },
-    {
       "name": "Jane Doe",
       "text": "Front end developer",
       "reminder": false,
@@ -20,13 +13,6 @@
       "reminder": false,
       "image": null,
       "id": 10
-    },
-    {
-      "name": "Jane Doe",
-      "text": "Langu",
-      "reminder": false,
-      "image": "blob:http://localhost:3000/e23d9056-c379-4574-8144-6ec830681932",
-      "id": 11
     }
   ]
 }

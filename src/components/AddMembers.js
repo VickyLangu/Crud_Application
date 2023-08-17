@@ -4,17 +4,58 @@ import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
 const AddMembers = ({ onAdd }) => {
-  const [name, setText] = useState("");
-  const [text, setDay] = useState("");
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
   const [reminder, setReminder] = useState(false);
   const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
     setImage(selectedImage);
   };
 
-  const onSubmit = (e) => {
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!name) {
+  //     alert("Please add a member's name");
+  //     return;
+  //   }
+
+  //   const formData = new FormData();
+  //   formData.append("image", image); // Append the image to the form data
+
+  //   // Upload the image to the server and get the URL
+  //   try {
+  //     const response = await fetch("YOUR_UPLOAD_IMAGE_API_URL", {
+  //       method: "POST",
+  //       body: formData,
+  //     });
+
+  //     const data = await response.json();
+  //     setImageUrl(data.imageUrl); // Store the image URL
+  //   } catch (error) {
+  //     console.error("Error uploading image:", error);
+  //   }
+  //   const newMember = {
+  //     name,
+  //     title,
+  //     reminder,
+  //     image: imageUrl,
+  //     // image: image ? URL.createObjectURL(image) : null, // Use the image URL if available
+  //   };
+
+  //   onAdd(newMember);
+
+  //   setName("");
+  //   setTitle("");
+  //   setReminder(false);
+  //   setImage(null);
+  //   setImageUrl("");
+  // };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (!name) {
@@ -22,19 +63,35 @@ const AddMembers = ({ onAdd }) => {
       return;
     }
 
-    const newMember = {
-      name,
-      text,
-      reminder,
-      image: image ? URL.createObjectURL(image) : null, // Use the image URL if available
-    };
+    const formData = new FormData();
+    formData.append("image", image); // Append the image to the form data
 
-    onAdd(newMember);
+    try {
+      const response = await fetch("YOUR_UPLOAD_IMAGE_API_URL", {
+        method: "POST",
+        body: formData,
+      });
 
-    setText("");
-    setDay("");
-    setReminder(false);
-    setImage(null);
+      const data = await response.json();
+      setImageUrl(data.imageUrl); // Store the image URL
+
+      const newMember = {
+        name,
+        title,
+        reminder,
+        image: imageUrl, // Use the image URL from the server
+      };
+
+      onAdd(newMember);
+
+      setName("");
+      setTitle("");
+      setReminder(false);
+      setImage(null);
+      setImageUrl("");
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
   };
 
   return (
@@ -52,12 +109,8 @@ const AddMembers = ({ onAdd }) => {
         </Link>
       </div>
       <div className="profile-picture-container">
-        {image ? (
-          <img
-            src={URL.createObjectURL(image)}
-            alt="Profile"
-            className="profile-picture"
-          />
+        {imageUrl ? (
+          <img src={imageUrl} alt="Profile" className="profile-picture" />
         ) : (
           <img
             src={require("../image/background.png")} // Replace with the actual path to your placeholder image
@@ -82,15 +135,15 @@ const AddMembers = ({ onAdd }) => {
           type="text"
           placeholder="Full names"
           value={name}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="form-control">
         <input
           type="text"
           placeholder="Job Title"
-          value={text}
-          onChange={(e) => setDay(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </div>
 

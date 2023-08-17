@@ -18,7 +18,7 @@ const Members = ({ members, onDelete, handleToggle, handleEdit, onEdit }) => {
           member={member}
           onDelete={onDelete}
           onToggle={handleToggle}
-          onEdit={handleEditClick} // Change 'onEdit' to 'handleEditClick'
+          handleEditClick={handleEditClick} // Change 'onEdit' to 'handleEditClick'
         />
       ))}
     </>

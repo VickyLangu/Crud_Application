@@ -47,7 +47,7 @@ const Header = ({ title, onAdd, showAdd }) => {
       <h1></h1>
       {location.pathname === "/" && ( // Render the button only on the home page
         <Link to="/add" style={{ textDecoration: "none" }}>
-          <Button text="Add Member" onClick={onAdd} />
+          <Button text="Add Member" /> {/* onClick={onAdd} */}
         </Link>
       )}
       {/* {location.pathname.includes("/edit/") && (

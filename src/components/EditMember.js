@@ -39,7 +39,7 @@ import { FaArrowLeft } from "react-icons/fa";
 
 const EditMember = ({ member, onEdit, onBack }) => {
   const [name, setName] = useState("");
-  const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
   const [reminder, setReminder] = useState(false);
   const [image, setImage] = useState(null);
 
@@ -47,7 +47,7 @@ const EditMember = ({ member, onEdit, onBack }) => {
     // console.log("Received member prop:", member);
     if (member) {
       setName(member.name);
-      setText(member.text);
+      setTitle(member.title);
       setReminder(member.reminder);
       setImage(member.image ? new File([member.image], "profile.jpg") : null);
     }
@@ -68,7 +68,7 @@ const EditMember = ({ member, onEdit, onBack }) => {
 
     const updatedMember = {
       name,
-      text,
+      text: title,
       reminder,
       image: image ? URL.createObjectURL(image) : null,
     };
@@ -120,15 +120,15 @@ const EditMember = ({ member, onEdit, onBack }) => {
           type="text"
           placeholder="Full names"
           value={name}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="form-control">
         <input
           type="text"
           placeholder="Job Title"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </div>
 
