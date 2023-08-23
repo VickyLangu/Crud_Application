@@ -58,7 +58,6 @@ const App = () => {
       },
       body: JSON.stringify(updatedMember),
     });
-
     setTasks((prevTasks) =>
       prevTasks.map((member) =>
         member.id === id ? { ...member, ...updatedMember } : member
@@ -93,6 +92,13 @@ const App = () => {
         member.id === id ? { ...member, reminder: data.reminder } : member
       )
     );
+  };
+
+  const handleEditClick = (id) => {
+    const selectedMember = members.find((member) => member.id === id);
+    if (selectedMember) {
+      setSelectedMemberData(selectedMember);
+    }
   };
 
   // function App() {
@@ -164,19 +170,22 @@ const App = () => {
                 members={members}
                 onDelete={deleteTask}
                 onToggle={toggleReminder}
-                onEdit={(id) =>
-                  setSelectedMemberData(
-                    members.find((member) => member.id === id)
-                  )
-                }
+                onEdit={handleEditClick} // Pass your handleEditClick function here
+                setSelectedMemberData={setSelectedMemberData} // Pass the setter function
               />
             }
           />
           <Route path="/add" element={<AddMembers onAdd={addTask} />} />
+
           <Route
             path="/edit/:id"
             element={
-              <EditMember member={selectedMemberData} onEdit={editTask} />
+              <EditMember
+                member={selectedMemberData}
+                onEdit={(updatedMember) =>
+                  editTask(selectedMemberData.id, updatedMember)
+                }
+              />
             }
           />
         </Routes>

@@ -9,14 +9,10 @@ const Member = ({ member, onDelete, onToggle, onEdit }) => {
   const toggleEditing = () => {
     setEditing(!editing);
   };
-  const editTask = (updatedMember) => {
+  const handleEdit = (updatedMember) => {
     onEdit(member.id, updatedMember);
     toggleEditing();
   };
-
-  // const Delete = (member) => {
-  //   onDelete(member);
-  // };
 
   return (
     <div
@@ -32,12 +28,12 @@ const Member = ({ member, onDelete, onToggle, onEdit }) => {
           />
         )}
         <div className="member-details">
-          <h2>{member.name} </h2>{" "}
+          <h2>{member.name} </h2>
           <div className="member-icons">
             <Link to={`/edit/${member.id}`}>
               <FaPencilAlt
                 style={{ color: "gray", cursor: "pointer" }}
-                onClick={toggleEditing} // Use onEdit instead of onEditClick
+                // onClick={toggleEditing}
               />
             </Link>
             <FaTrashAlt
@@ -46,12 +42,9 @@ const Member = ({ member, onDelete, onToggle, onEdit }) => {
             />
           </div>
           {editing ? (
-            <EditMember
-              member={member} // Pass the existing member data to EditMember
-              onEdit={editTask} // Pass the onEdit function directly
-            />
+            <EditMember member={member} onEdit={handleEdit} />
           ) : (
-            <h3>{member.text}</h3>
+            <h3>{member.title}</h3>
           )}
         </div>
       </div>
